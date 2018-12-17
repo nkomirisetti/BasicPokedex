@@ -2,12 +2,8 @@ var buildPokemonPage = function (inputString) {
     var bodyContainer = $('#bodyContainer');
     bodyContainer.empty();
 
-    var pokemonContainer = $('<div class="pokemonPage"></div>');
+    var pokemonContainer = $('<div id="pokemonPage" class="pokemonPage"></div>');
     bodyContainer.append(pokemonContainer);
-
-    // pokemonContainer.append("<div class='searching'>searching...</div>");
-    // pokemonContainer.fadeOut(0);
-    // pokemonContainer.fadeIn(fadeTiming);
 
     $.ajax("https://pokeapi.co/api/v2/pokemon/" + inputString + "/", {
         type: 'GET',
@@ -30,7 +26,7 @@ var buildPokemonPage = function (inputString) {
 };
 
 var buildPokemonContainer = function(pokemonData) {
-    var pokemonContainer = $('<div class="pokemonPage"></div>');
+    var pokemonContainer = $('#pokemonPage');
 
     pokemonContainer.empty();
     var pokemonName = pokemonData.name;
@@ -38,5 +34,9 @@ var buildPokemonContainer = function(pokemonData) {
     console.log(pokemonName);
     var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
     pokemonContainer.append(dataDiv);
+
+    pokemonContainer.fadeOut(0);
+    pokemonContainer.fadeIn(fadeTiming);
+
 }
 
