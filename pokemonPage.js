@@ -35,11 +35,21 @@ var buildPokemonContainer = function (pokemonData) {
     var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
     pokemonContainer.append(dataDiv);
 
-    //add abilities
+    // add background info
+    pokemonContainer.append(buildBackgroundContainer(pokemonData));
+
+    // add abilities
     pokemonContainer.append(buildAbilitiesContainer(pokemonData.abilities));
 
     // add types
     pokemonContainer.append(buildTypesContainer(pokemonData.types));
+
+    var returnButton = $("<button id='returnButton' class='mainButton'>Go back</button>").click(function () {
+        pokemonContainer.fadeOut(fadeTiming, function () {
+            buildSearchPage();
+        });
+    });
+    pokemonContainer.append(returnButton);
 
     pokemonContainer.fadeOut(0);
     pokemonContainer.fadeIn(fadeTiming);
@@ -104,5 +114,10 @@ var buildTypesContainer = function (types) {
 }
 
 var buildBackgroundContainer = function (fullData) {
-    
+    var backgroundDiv = $('<div class="backgroundContainer"><h3 class="containerTitle">Basic Info</h3></div>');
+    backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4>' + fullData.id);
+    backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4>' + fullData.height/10 + " Meters");
+    backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4>' + fullData.weight/10 + " Kilograms");
+
+    return backgroundDiv;
 }
