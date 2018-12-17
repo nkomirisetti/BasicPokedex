@@ -38,6 +38,9 @@ var buildPokemonContainer = function (pokemonData) {
     //add abilities
     pokemonContainer.append(buildAbilitiesContainer(pokemonData.abilities));
 
+    // add types
+    pokemonContainer.append(buildTypesContainer(pokemonData.types));
+
     pokemonContainer.fadeOut(0);
     pokemonContainer.fadeIn(fadeTiming);
 }
@@ -80,4 +83,26 @@ var buildAbilitiesContainer = function (abilities) {
     }
 
     return abilitiesDiv;
+}
+
+var buildTypesContainer = function (types) {
+    var typeDiv;
+    if (types.length === 2) {
+        typeDiv = $('<div class="typeContainer"><h3 class="containerTitle">Types</h3></div>');
+    } else {
+        typeDiv = $('<div class="typeContainer"><h3 class="containerTitle">Type</h3></div>');
+    }
+    var typeList = $('<ul class="list"></ul>');
+    for (let type of types) {
+        var typeName = type.type.name;
+        typeName = typeName.charAt(0).toUpperCase() + typeName.slice(1);
+        typeList.append('<li class="listElement">' + typeName + '</li>');
+    }
+    typeDiv.append(typeList);
+    return typeDiv;
+
+}
+
+var buildBackgroundContainer = function (fullData) {
+    
 }
