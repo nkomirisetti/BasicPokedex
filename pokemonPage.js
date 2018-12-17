@@ -25,7 +25,7 @@ var buildPokemonPage = function (inputString) {
     });
 };
 
-var buildPokemonContainer = function(pokemonData) {
+var buildPokemonContainer = function (pokemonData) {
     var pokemonContainer = $('#pokemonPage');
 
     pokemonContainer.empty();
@@ -35,8 +35,49 @@ var buildPokemonContainer = function(pokemonData) {
     var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
     pokemonContainer.append(dataDiv);
 
+    //add abilities
+    pokemonContainer.append(buildAbilitiesContainer(pokemonData.abilities));
+
     pokemonContainer.fadeOut(0);
     pokemonContainer.fadeIn(fadeTiming);
-
 }
 
+var buildAbilitiesContainer = function (abilities) {
+    var abilitiesDiv = $('<div class="abilitiesContainer"><h3 class="containerTitle">Abilities</h3></div>');
+    var hiddenAbilities = [];
+    var normalAbilities = [];
+    console.log(abilities);
+    for (let ability of abilities) {
+        if (ability.is_hidden === true) {
+            hiddenAbilities.push(ability);
+        } else {
+            normalAbilities.push(ability);
+        }
+    }
+
+    if (normalAbilities.length > 0) {
+        var normalAbilitiesDiv = $('<div class="normalAbilitiesContainer"><h4 class="containerSubtitle">Normal Abilities</h4></div>');
+        var abilitiesList = $('<ul class="list"></ul>');
+        for (let ability of normalAbilities) {
+            var abilityName = ability.ability.name;
+            abilityName = abilityName.charAt(0).toUpperCase() + abilityName.slice(1);
+            abilitiesList.append('<li class="listElement">' + abilityName + '</li>');
+        }
+        normalAbilitiesDiv.append(abilitiesList);
+        abilitiesDiv.append(normalAbilitiesDiv);
+    }
+
+    if (hiddenAbilities.length > 0) {
+        var hiddenAbilitiesDiv = $('<div class="hiddenAbilitiesContainer"><h4 class="containerSubtitle">Hidden Abilities</h4></div>');
+        var abilitiesList = $('<ul class="list"></ul>');
+        for (let ability of hiddenAbilities) {
+            var abilityName = ability.ability.name;
+            abilityName = abilityName.charAt(0).toUpperCase() + abilityName.slice(1);
+            abilitiesList.append('<li class="listElement">' + abilityName + '</li>');
+        }
+        hiddenAbilitiesDiv.append(abilitiesList);
+        abilitiesDiv.append(hiddenAbilitiesDiv);
+    }
+
+    return abilitiesDiv;
+}
