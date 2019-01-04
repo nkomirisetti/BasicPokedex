@@ -1,0 +1,3 @@
+var buildMovePage = function (moveURL) {
+
+}

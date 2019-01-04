@@ -7,6 +7,9 @@ var buildSearchPage = function () {
     var searchButton = $("<button id='searchButton' class='mainButton'>Search</button>").click(function () {
         searchContainer.fadeOut(fadeTiming, function () {
             var inputString = $.trim($("#pokemonSearch").val());
+            if (inputString === ""){
+                buildPokemonPage("Empty")
+            }
             buildPokemonPage(inputString);
         });
     });

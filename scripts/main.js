@@ -1,5 +1,5 @@
 let dbRoot = "http://pokeapi.co/api/v2/";
-let fadeTiming = 600;
+let fadeTiming = 1000;
 $(document).ready(() =>{
     buildSearchPage();
 })
