@@ -44,6 +44,9 @@ var buildPokemonContainer = function (pokemonData) {
     // add types
     pokemonContainer.append(buildTypesContainer(pokemonData.types));
 
+    // add sprites
+    pokemonContainer.append(buildSpritesContainer(pokemonData.sprites));
+
     var returnButton = $("<button id='returnButton' class='mainButton'>Go back</button>").click(function () {
         pokemonContainer.fadeOut(fadeTiming, function () {
             buildSearchPage();
@@ -110,7 +113,6 @@ var buildTypesContainer = function (types) {
     }
     typeDiv.append(typeList);
     return typeDiv;
-
 }
 
 var buildBackgroundContainer = function (fullData) {
@@ -120,4 +122,55 @@ var buildBackgroundContainer = function (fullData) {
     backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4>' + fullData.weight/10 + " Kilograms");
 
     return backgroundDiv;
+}
+
+var buildSpritesContainer = function (sprites) {
+    var spritesDiv = $('<div class="spritesContainer"><h3 class="containerTitle">Sprites</h3></div>');
+    var spritesList = $('<ul class="spritesList"></ul>');
+    
+    if (sprites.back_default != null){
+        spritesList.append('<li data-thumb="' + sprites.back_default + '"><img src="' + sprites.back_default + '" title="Default Back"></img></li>')
+    }
+
+    if (sprites.back_female != null){
+        spritesList.append('<li data-thumb="' + sprites.back_female + '"><img src="' + sprites.back_female + '" title="Female Back"></img></li>')
+    }
+
+    if (sprites.back_shiny != null){
+        spritesList.append('<li data-thumb="' + sprites.back_shiny + '"><img src="' + sprites.back_shiny + '" title="Shiny Back"></img></li>')
+    }
+
+    if (sprites.back_shiny_female != null){
+        spritesList.append('<li data-thumb="' + sprites.back_shiny_female + '"><img src="' + sprites.back_shiny_female + '" title="Shiny Female Back"></img></li>')
+    }
+
+    if (sprites.front_default != null){
+        spritesList.append('<li data-thumb="' + sprites.front_default + '"><img src="' + sprites.front_default + '" title="Default Front"></img></li>')
+    }
+
+    if (sprites.front_female != null){
+        spritesList.append('<li data-thumb="' + sprites.front_female + '"><img src="' + sprites.front_female + '" title="Female Front"></img></li>')
+    }
+
+    if (sprites.front_shiny != null){
+        spritesList.append('<li data-thumb="' + sprites.front_shiny + '"><img src="' + sprites.front_shiny + '" title="Shiny Front"></img></li>')
+    }
+
+    if (sprites.front_shiny_female != null){
+        spritesList.append('<li data-thumb="' + sprites.front_shiny_female + '"><img src="' + sprites.front_shiny_female + '" title="Shiny Female Front"></img></li>')
+    }
+    
+    spritesList.lightSlider({
+        gallery: true,
+        item: 3,
+        loop: true,
+        slideMargin: 0,
+        thumbItem: 4    
+    })
+
+
+    spritesDiv.append(spritesList);
+
+
+    return spritesDiv;
 }
