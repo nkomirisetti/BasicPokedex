@@ -14,3 +14,4 @@ $(document).ready(() =>{
 //         alert("pokemon not found");
 //     }
 // });
+//     #2a75bb;

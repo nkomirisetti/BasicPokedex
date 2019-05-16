@@ -18,6 +18,7 @@ var buildPokemonPage = function (inputString) {
                     buildSearchPage();
                 });
             });
+
             pokemonContainer.append(returnButton);
             pokemonContainer.fadeOut(0);
             pokemonContainer.fadeIn(fadeTiming);
@@ -31,7 +32,7 @@ var buildPokemonContainer = function (pokemonData) {
     pokemonContainer.empty();
     var pokemonName = pokemonData.name;
     pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    console.log(pokemonName);
+    console.log(pokemonData);
     var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
     pokemonContainer.append(dataDiv);
 
@@ -65,7 +66,6 @@ var buildAbilitiesContainer = function (abilities) {
     var abilitiesDiv = $('<div class="abilitiesContainer"><h3 class="containerTitle">Abilities</h3></div>');
     var hiddenAbilities = [];
     var normalAbilities = [];
-    console.log(abilities);
     for (let ability of abilities) {
         if (ability.is_hidden === true) {
             hiddenAbilities.push(ability);
@@ -130,7 +130,16 @@ var buildBackgroundContainer = function (fullData) {
 var buildSpritesContainer = function (sprites) {
     var spritesDiv = $('<div class="spritesContainer"><h3 class="containerTitle">Sprites</h3></div>');    
     var frontSprite = $('<img src="' + sprites.front_default +'" id="frontSprite" class="sprite">');
-    var backSprite = $('<img src="' + sprites.back_default +'" id="backSprite" class="sprite">');
+    var backSprite = $('<img src="' + sprites.back_default +'" id="backSprite" class="sprite">');    
+
+    var img = new Image();
+    img.src = sprites.front_default + '?' +new Date().getTime();
+    img.crossOrigin = '';
+    img.onload=function() {
+        var vibrant = new Vibrant(img);
+        console.log(vibrant.swatches())
+    }
+
     spritesDiv.append(frontSprite);
     spritesDiv.append(backSprite);
     return spritesDiv;
