@@ -35,7 +35,7 @@ var buildPokemonContainer = function (pokemonData) {
     console.log(pokemonData);
     var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
     pokemonContainer.append(dataDiv);
-
+    console.log(pokemonData);
     // add background info
     pokemonContainer.append(buildBackgroundContainer(pokemonData));
 
@@ -63,7 +63,7 @@ var buildPokemonContainer = function (pokemonData) {
 }
 
 var buildAbilitiesContainer = function (abilities) {
-    var abilitiesDiv = $('<div class="abilitiesContainer"><h3 class="containerTitle">Abilities</h3></div>');
+    var abilitiesDiv = $('<div class="subContainer"><h3 class="containerTitle">Abilities</h3></div>');
     var hiddenAbilities = [];
     var normalAbilities = [];
     for (let ability of abilities) {
@@ -104,9 +104,9 @@ var buildAbilitiesContainer = function (abilities) {
 var buildTypesContainer = function (types) {
     var typeDiv;
     if (types.length === 2) {
-        typeDiv = $('<div class="typeContainer"><h3 class="containerTitle">Types</h3></div>');
+        typeDiv = $('<div class="subContainer"><h3 class="containerTitle">Types</h3></div>');
     } else {
-        typeDiv = $('<div class="typeContainer"><h3 class="containerTitle">Type</h3></div>');
+        typeDiv = $('<div class="subContainer"><h3 class="containerTitle">Type</h3></div>');
     }
     var typeList = $('<ul class="list"></ul>');
     for (let type of types) {
@@ -119,7 +119,7 @@ var buildTypesContainer = function (types) {
 }
 
 var buildBackgroundContainer = function (fullData) {
-    var backgroundDiv = $('<div class="backgroundContainer"><h3 class="containerTitle">Basic Info</h3></div>');
+    var backgroundDiv = $('<div class="subContainer"><h3 class="containerTitle">Basic Info</h3></div>');
     backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4>' + fullData.id);
     backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4>' + fullData.height/10 + " Meters");
     backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4>' + fullData.weight/10 + " Kilograms");
@@ -146,5 +146,5 @@ var buildSpritesContainer = function (sprites) {
 }
 
 var buildMovesContainer = function (moves) {
-    
+    // TODO: make da moves
 }
