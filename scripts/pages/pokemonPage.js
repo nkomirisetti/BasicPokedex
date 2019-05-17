@@ -28,14 +28,15 @@ var buildPokemonPage = function (inputString) {
 
 var buildPokemonContainer = function (pokemonData) {
     var pokemonContainer = $('#pokemonPage');
-
     pokemonContainer.empty();
-    var pokemonName = pokemonData.name;
-    pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    console.log(pokemonData);
-    var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
-    pokemonContainer.append(dataDiv);
-    console.log(pokemonData);
+
+    // add pokemon name
+    pokemonContainer.append(buildPokemonName(pokemonData.name));
+
+    var pokemonInfoList = $("<div id='pokemonInfoList' class='pokemonInfoList'></div>");
+    pokemonContainer.append(pokemonInfoList);
+    pokemonContainer = $('#pokemonInfoList');
+    
     // add background info
     pokemonContainer.append(buildBackgroundContainer(pokemonData));
 
@@ -55,6 +56,7 @@ var buildPokemonContainer = function (pokemonData) {
     changeColors(pokemonData.sprites);
 
     var returnButton = $("<button id='returnButton' class='mainButton'>Go back</button>").click(function () {
+        var pokemonContainer = $('#pokemonPage');
         pokemonContainer.fadeOut(fadeTiming, function () {
             buildSearchPage();
         });
@@ -66,7 +68,7 @@ var buildPokemonContainer = function (pokemonData) {
 }
 
 var buildAbilitiesContainer = function (abilities) {
-    var abilitiesDiv = $('<div class="subContainer"><h3 class="containerTitle">Abilities</h3></div>');
+    var abilitiesDiv = $('<div class="subContainer" id="abilitiesContainer"><h3 class="containerTitle">Abilities</h3></div>');
     var hiddenAbilities = [];
     var normalAbilities = [];
     for (let ability of abilities) {
@@ -107,9 +109,9 @@ var buildAbilitiesContainer = function (abilities) {
 var buildTypesContainer = function (types) {
     var typeDiv;
     if (types.length === 2) {
-        typeDiv = $('<div class="subContainer"><h3 class="containerTitle">Types</h3></div>');
+        typeDiv = $('<div class="subContainer" id="typesContainer"><h3 class="containerTitle">Types</h3></div>');
     } else {
-        typeDiv = $('<div class="subContainer"><h3 class="containerTitle">Type</h3></div>');
+        typeDiv = $('<div class="subContainer" id="typesContainer"><h3 class="containerTitle">Type</h3></div>');
     }
     var typeList = $('<ul class="list"></ul>');
     for (let type of types) {
@@ -122,7 +124,7 @@ var buildTypesContainer = function (types) {
 }
 
 var buildBackgroundContainer = function (fullData) {
-    var backgroundDiv = $('<div class="subContainer"><h3 class="containerTitle">Basic Info</h3></div>');
+    var backgroundDiv = $('<div class="subContainer" id="backgroundContainer"><h3 class="containerTitle">Basic Info</h3></div>');
     backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4><span class="pokedexNum"' + fullData.id + '</span>');
     backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4> <span class="height">' + fullData.height / 10 + " Meters</span>");
     backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4> <span class="weight">' + fullData.weight / 10 + " Kilograms</span>");
@@ -161,6 +163,13 @@ var changeColors = function (sprites) {
         console.log('\'Raleway\', sans-serif')
         $('.subContainer').css('background-color', cssString);
         $('#returnButton').css('background-color', cssString);
+        $('#returnButton').css('color', fore);
         $('.subContainer').find('*').css('color', fore);
     }
+}
+
+var buildPokemonName = function(pokemonName){
+    pokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    var dataDiv = $('<div class="mainContainer"><h2 class="pokemonTitle">' + pokemonName + '</h2></div>');
+    return dataDiv
 }

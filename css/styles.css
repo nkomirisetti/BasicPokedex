@@ -8,9 +8,14 @@ h1 {
     font-weight: bolder;
 }
 
-h1,h2,h3,h4,body{
+h1,
+h2,
+h3,
+h4,
+body {
     font-family: 'Raleway', sans-serif;
 }
+
 img {
     image-rendering: pixelated;
     display: block;
@@ -43,6 +48,7 @@ img {
 }
 
 #pokemonSearch {
+    width: 75%;
     padding: 12px 20px;
     display: inline-block;
     border: 0px solid #ccc;
@@ -53,6 +59,7 @@ img {
     font-family: 'Raleway', sans-serif;
     font-weight: bold;
     margin: 10pt;
+    margin-left: 0;
 }
 
 input:focus {
@@ -60,7 +67,6 @@ input:focus {
 }
 
 button {
-    width: 25%;
     height: 100%;
     background-color: #123C69;
     border: none;
@@ -84,13 +90,48 @@ button:hover {
     transition: 0.3s;
     border-radius: 5px;
     background-color: #123C69;
-    margin: 3px;
-    width: 80%;
+    margin: 8px;
+    width: 90%;
     padding: 20px;
     transition: width 1s ease-in-out;
+    overflow: hidden;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
+
 
 .pokemonTitle {
     font-family: 'Raleway', sans-serif;
     color: #ffcb05;
+}
+
+#pokemonInfoList {   
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+    columns: 2 200px;
+    -webkit-column-gap: 1em;
+    -moz-column-gap: 1em;
+    column-gap: 1em;
+}
+
+#returnButton {
+    margin: 8px;
+}
+
+#frontSprite, #backSprite {
+    width: 50%;
+}
+
+.spritesContainer{
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+    columns: 2 200px;
+    -webkit-column-gap: 1em;
+    -moz-column-gap: 1em;
+    column-gap: 1em;
+}
+
+#backgroundContainer {
+    margin-top: 0;
 }
