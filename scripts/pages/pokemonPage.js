@@ -27,6 +27,8 @@ var buildPokemonPage = function (inputString) {
 };
 
 var buildPokemonContainer = function (pokemonData) {
+    console.log(pokemonData)
+    
     var pokemonContainer = $('#pokemonPage');
     pokemonContainer.empty();
 
@@ -125,7 +127,7 @@ var buildTypesContainer = function (types) {
 
 var buildBackgroundContainer = function (fullData) {
     var backgroundDiv = $('<div class="subContainer" id="backgroundContainer"><h3 class="containerTitle">Basic Info</h3></div>');
-    backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4><span class="pokedexNum"' + fullData.id + '</span>');
+    backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4><span class="pokedexNum">' + fullData.id + '</span>');
     backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4> <span class="height">' + fullData.height / 10 + " Meters</span>");
     backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4> <span class="weight">' + fullData.weight / 10 + " Kilograms</span>");
 
@@ -135,7 +137,14 @@ var buildBackgroundContainer = function (fullData) {
 var buildSpritesContainer = function (sprites) {
     var spritesDiv = $('<div class="spritesContainer subContainer"><h3 class="containerTitle">Sprites</h3></div>');
     var frontSprite = $('<img src="' + sprites.front_default + '" id="frontSprite" class="sprite">');
-    var backSprite = $('<img src="' + sprites.back_default + '" id="backSprite" class="sprite">');
+    
+    var backSprite;
+
+    if (sprites.back_default===null){
+        backSprite = $('<img src="' + sprites.front_shiny + '" id="backSprite" class="sprite">');
+    } else {
+        backSprite = $('<img src="' + sprites.back_default + '" id="backSprite" class="sprite">');
+    }
 
     spritesDiv.append(frontSprite);
     spritesDiv.append(backSprite);
@@ -160,7 +169,6 @@ var changeColors = function (sprites) {
 
         var fore = (o > 125) ? 'black' : 'white';
 
-        console.log('\'Raleway\', sans-serif')
         $('.subContainer').css('background-color', cssString);
         $('#returnButton').css('background-color', cssString);
         $('#returnButton').css('color', fore);

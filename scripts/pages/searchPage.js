@@ -12,9 +12,21 @@ var buildSearchPage = function () {
             buildPokemonPage(inputString);
         });
     });
+
+    var randomButton = $("<button id='randomButton' class='mainButton'>Random</button>").click(function(){
+        searchContainer.fadeOut(fadeTiming, function () {
+            buildPokemonPage(getRandomInt(744) + 1);
+        });
+
+    })
+
+
     searchContainer.append(searchButton);
+    searchContainer.append(randomButton);
+
     searchContainer.fadeOut(0);
     searchContainer.fadeIn(fadeTiming);
+
 
     $("#pokemonSearch").keyup(function(event) {
         if (event.keyCode === 13) {
@@ -23,3 +35,7 @@ var buildSearchPage = function () {
     });
     
 };
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
