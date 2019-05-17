@@ -51,12 +51,15 @@ var buildPokemonContainer = function (pokemonData) {
     // add moves
     pokemonContainer.append(buildMovesContainer(pokemonData.moves));
 
+    // change colors
+    changeColors(pokemonData.sprites);
+
     var returnButton = $("<button id='returnButton' class='mainButton'>Go back</button>").click(function () {
         pokemonContainer.fadeOut(fadeTiming, function () {
             buildSearchPage();
         });
     });
-    
+
     pokemonContainer.append(returnButton);
     pokemonContainer.fadeOut(0);
     pokemonContainer.fadeIn(fadeTiming);
@@ -80,7 +83,7 @@ var buildAbilitiesContainer = function (abilities) {
         for (let ability of normalAbilities) {
             var abilityName = ability.ability.name;
             abilityName = abilityName.charAt(0).toUpperCase() + abilityName.slice(1);
-            abilitiesList.append('<li class="listElement">' + abilityName + '</li>');
+            abilitiesList.append('<li class="listElement"><span class="abililtyName">' + abilityName + '</span></li>');
         }
         normalAbilitiesDiv.append(abilitiesList);
         abilitiesDiv.append(normalAbilitiesDiv);
@@ -92,7 +95,7 @@ var buildAbilitiesContainer = function (abilities) {
         for (let ability of hiddenAbilities) {
             var abilityName = ability.ability.name;
             abilityName = abilityName.charAt(0).toUpperCase() + abilityName.slice(1);
-            abilitiesList.append('<li class="listElement">' + abilityName + '</li>');
+            abilitiesList.append('<li class="listElement"><span class="hiddenAbililtyName">' + abilityName + '</span></li>');
         }
         hiddenAbilitiesDiv.append(abilitiesList);
         abilitiesDiv.append(hiddenAbilitiesDiv);
@@ -112,7 +115,7 @@ var buildTypesContainer = function (types) {
     for (let type of types) {
         var typeName = type.type.name;
         typeName = typeName.charAt(0).toUpperCase() + typeName.slice(1);
-        typeList.append('<li class="listElement">' + typeName + '</li>');
+        typeList.append('<li class="listElement"><span class=typeName>' + typeName + '</span></li>');
     }
     typeDiv.append(typeList);
     return typeDiv;
@@ -120,25 +123,17 @@ var buildTypesContainer = function (types) {
 
 var buildBackgroundContainer = function (fullData) {
     var backgroundDiv = $('<div class="subContainer"><h3 class="containerTitle">Basic Info</h3></div>');
-    backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4>' + fullData.id);
-    backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4>' + fullData.height/10 + " Meters");
-    backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4>' + fullData.weight/10 + " Kilograms");
+    backgroundDiv.append('<h4 class="containerSubtitle">Pokédex Number: </h4><span class="pokedexNum"' + fullData.id + '</span>');
+    backgroundDiv.append('<h4 class="containerSubtitle">Height: </h4> <span class="height">' + fullData.height / 10 + " Meters</span>");
+    backgroundDiv.append('<h4 class="containerSubtitle">Weight: </h4> <span class="weight">' + fullData.weight / 10 + " Kilograms</span>");
 
     return backgroundDiv;
 }
 
 var buildSpritesContainer = function (sprites) {
-    var spritesDiv = $('<div class="spritesContainer"><h3 class="containerTitle">Sprites</h3></div>');    
-    var frontSprite = $('<img src="' + sprites.front_default +'" id="frontSprite" class="sprite">');
-    var backSprite = $('<img src="' + sprites.back_default +'" id="backSprite" class="sprite">');    
-
-    var img = new Image();
-    img.src = sprites.front_default + '?' +new Date().getTime();
-    img.crossOrigin = '';
-    img.onload=function() {
-        var vibrant = new Vibrant(img);
-        console.log(vibrant.swatches())
-    }
+    var spritesDiv = $('<div class="spritesContainer subContainer"><h3 class="containerTitle">Sprites</h3></div>');
+    var frontSprite = $('<img src="' + sprites.front_default + '" id="frontSprite" class="sprite">');
+    var backSprite = $('<img src="' + sprites.back_default + '" id="backSprite" class="sprite">');
 
     spritesDiv.append(frontSprite);
     spritesDiv.append(backSprite);
@@ -147,4 +142,25 @@ var buildSpritesContainer = function (sprites) {
 
 var buildMovesContainer = function (moves) {
     // TODO: make da moves
+}
+
+var changeColors = function (sprites) {
+    var img = new Image();
+    img.src = sprites.front_default + '?' + new Date().getTime();
+    img.crossOrigin = '';
+    img.onload = function () {
+        var vibrant = new Vibrant(img);
+        var colors = vibrant.swatches().Vibrant.rgb;
+        var cssString = 'rgb(' + colors[0] + ',' + colors[1] + ',' + colors[2] + ')'
+        var o = Math.round(((parseInt(colors[0]) * 299) +
+            (parseInt(colors[1]) * 587) +
+            (parseInt(colors[2]) * 114)) / 1000);
+
+        var fore = (o > 125) ? 'black' : 'white';
+
+        console.log('\'Raleway\', sans-serif')
+        $('.subContainer').css('background-color', cssString);
+        $('#returnButton').css('background-color', cssString);
+        $('.subContainer').find('*').css('color', fore);
+    }
 }

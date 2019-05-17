@@ -8,6 +8,9 @@ h1 {
     font-weight: bolder;
 }
 
+h1,h2,h3,h4,body{
+    font-family: 'Raleway', sans-serif;
+}
 img {
     image-rendering: pixelated;
     display: block;
@@ -18,14 +21,14 @@ img {
 .spritesList {
     list-style: none outside none;
     padding-left: 0;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
-.spriteSlide{
+.spriteSlide {
     display: block;
     float: left;
     margin-right: 6px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #rootContainer {
@@ -36,7 +39,7 @@ img {
     margin: auto;
     width: 80%;
     padding: 20px;
-    transition:width 1s ease-in-out;
+    transition: width 1s ease-in-out;
 }
 
 #pokemonSearch {
@@ -52,11 +55,11 @@ img {
     margin: 10pt;
 }
 
-input:focus{
+input:focus {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-button{
+button {
     width: 25%;
     height: 100%;
     background-color: #123C69;
@@ -71,14 +74,12 @@ button{
     transition: all .25s;
 }
 
-button:hover{
-    background:#53a7ea;
+button:hover {
+    background: #53a7ea;
 }
 
-.backgroundContainer,
-.abilitiesContainer,
-.typeContainer,
-.spritesContainer{
+.subContainer,
+.spritesContainer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 5px;
@@ -86,5 +87,10 @@ button:hover{
     margin: 3px;
     width: 80%;
     padding: 20px;
-    transition:width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+}
+
+.pokemonTitle {
+    font-family: 'Raleway', sans-serif;
+    color: #ffcb05;
 }
