@@ -5,7 +5,7 @@ var buildSearchPage = function () {
     searchContainer.append("<input id='pokemonSearch' class='entryField' type='text' placeholder='Enter a Pok&eacute;mon...'>");
     var searchButton = $("<button id='searchButton' class='mainButton'>Search</button>").click(function () {
         searchContainer.fadeOut(fadeTiming, function () {
-            var inputString = $.trim($("#pokemonSearch").val());
+            var inputString = $.trim($("#pokemonSearch").val().toLowerCase());
             if (inputString === ""){
                 buildPokemonPage("Empty")
             }
